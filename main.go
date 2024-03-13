@@ -17,4 +17,5 @@ func main() {
 	/*
 		jawaban soal no.5
 	*/
+	// jawaban.Conenct()
 }
