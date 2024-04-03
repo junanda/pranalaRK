@@ -2,6 +2,7 @@ package jawaban
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"os"
 )
@@ -29,6 +30,16 @@ func JsonReadModified(filePath string) {
 
 	dataRead.Email = "johndoe@example.com"
 	dataRead.Age += 1
+
+	dataNew, err := json.Marshal(dataRead)
+	if err != nil {
+		log.Println("error marshal data:", err.Error())
+	}
+
+	err = ioutil.WriteFile(filePath, dataNew, 0655)
+	if err != nil {
+		log.Println("Error Create File: ", err.Error())
+	}
 
 	log.Println("Data Json: ", dataRead)
 }

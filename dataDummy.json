@@ -1,5 +1,1 @@
-{
-    "name": "John Doe",
-    "email": "john.Doe@example.com",
-    "age": 30
-}
+{"name":"John Doe","email":"johndoe@example.com","age":32}
