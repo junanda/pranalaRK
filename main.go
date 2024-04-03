@@ -12,10 +12,22 @@ func main() {
 	/*
 		jawaban soal no.4
 	*/
-	jawaban.Run()
+	// jawaban.Run()
 
 	/*
 		jawaban soal no.5
 	*/
-	// jawaban.Conenct()
+	db := jawaban.Conenct()
+
+	db.AutoMigrate(&jawaban.User{})
+
+	// data := jawaban.User{
+	// 	Name:  "junanda",
+	// 	Email: "jpatihullah@gmail.com",
+	// 	Age:   "35",
+	// }
+
+	// jawaban.CreateData(data, db)
+
+	jawaban.ReadData("jpatihullah@gmail.com", db)
 }

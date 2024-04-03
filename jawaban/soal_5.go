@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type DataStore struct {
+type User struct {
 	gorm.Model
 	Name  string `json:"name"`
 	Email string `json:"email"`
@@ -16,7 +16,7 @@ type DataStore struct {
 }
 
 func Conenct() *gorm.DB {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=True", "root", "password", "127.0.0.1", "3306", "test_pranala")
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=True", "username", "password", "127.0.0.1", "3306", "name_database")
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -28,8 +28,8 @@ func Conenct() *gorm.DB {
 	return db
 }
 
-func CreateData(data interface{}, db *gorm.DB) {
-	err := db.Create(data).Error
+func CreateData(data User, db *gorm.DB) {
+	err := db.Create(&data).Error
 	if err != nil {
 		log.Println("Failed Store Data:", err.Error())
 	}
@@ -38,9 +38,9 @@ func CreateData(data interface{}, db *gorm.DB) {
 }
 
 func ReadData(email string, db *gorm.DB) {
-	var dataRead DataStore
+	var dataRead User
 
-	err := db.Where("email == ?", email).First(&dataRead).Error
+	err := db.Where("email = ?", email).First(&dataRead).Error
 	if err != nil {
 		log.Println("Failed Read data: ", err.Error())
 	}
